@@ -134,6 +134,8 @@ $resultado = mysqli_query($conexion, $consulta);
                 <!-- Content Header (Page header) -->
                 <div class="content-header">
                     <div class="container-fluid">
+
+
                     </div><!-- /.container-fluid -->
                 </div>
                 <!-- /.content-header -->
@@ -199,7 +201,7 @@ $resultado = mysqli_query($conexion, $consulta);
                                     <div class="card-body">
                                         <!-- /.d-flex -->
                                         <div class="position-relative mb-4">
-                                            <canvas id="visitors-chart" height="200"></canvas>
+                                            <div id="contenido3" height="200"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -239,7 +241,7 @@ $resultado = mysqli_query($conexion, $consulta);
                                         <!-- /.d-flex -->
 
                                         <div class="position-relative mb-4">
-                                            <canvas id="sales-chart" height="200"></canvas>
+                                            <div id="angulo_rodilla" height="200"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -308,6 +310,7 @@ $resultado = mysqli_query($conexion, $consulta);
         <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
         <script src="dist/js/pages/dashboard3.js"></script>
         <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+
         <script>
             var correo;
             correo = "<?php echo $correo; ?>";
@@ -362,9 +365,41 @@ $resultado = mysqli_query($conexion, $consulta);
                 contenido.innerHTML = datos;
             }
 
+            function graf_pulso() {
+                var datos = $.ajax({
+                    url: "graficos.php",
+                    method: "POST",
+                    datatype: "json",
+                    data: {
+                        correo: correo,
+                    },
+                    success: function(data) {
+                        $("#contenido3").html(data)
+                    }
+                });
+            }
+
+            function graf_angulo() {
+                var datos = $.ajax({
+                    url: "graf_angulo.php",
+                    method: "POST",
+                    datatype: "json",
+                    data: {
+                        correo: correo,
+                    },
+                    success: function(data) {
+                        $("#angulo_rodilla").html(data)
+                    }
+                });
+            }
+
+
+
             setInterval(pulso, 10000);
             setInterval(angulo, 10000);
             setInterval(promedio, 10000);
+            setInterval(graf_pulso, 10000);
+            setInterval(graf_angulo, 10000);
         </script>
 
     </body>
