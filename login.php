@@ -22,7 +22,8 @@
       }else{
       header("Location: paciente.php");}
     } else {
-      $message = 'Sorry, those credentials do not match';
+    echo '<script language="javascript">alert("Usuario o contraseña no coinciden");</script>';
+    header("Location: /ProyectoCC");
     }
   }
 
