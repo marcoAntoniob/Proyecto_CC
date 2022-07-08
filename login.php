@@ -18,12 +18,12 @@
     if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
       $_SESSION['user_id'] = $results['id'];
       if($tipo=="doctor"){
-      header("Location: /ProyectoCC");
+      header("Location: index.php");
       }else{
       header("Location: paciente.php");}
     } else {
     echo '<script language="javascript">alert("Usuario o contraseña no coinciden");</script>';
-    header("Location: /ProyectoCC");
+    header("Location: index.php");
     }
   }
 
